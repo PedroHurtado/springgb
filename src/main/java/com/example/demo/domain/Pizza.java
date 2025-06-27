@@ -7,6 +7,7 @@ import java.util.UUID;
 import com.example.demo.core.EntityBase;
 
 import jakarta.persistence.Entity;
+
 import jakarta.persistence.ManyToMany;
 
 

@@ -19,7 +19,7 @@ public abstract class EntityBase{
     protected EntityBase(UUID id){
         this.id = id;
     } 
-    UUID getId(){
+    public UUID getId(){
         return id;
     }
 

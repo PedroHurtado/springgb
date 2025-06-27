@@ -1,6 +1,5 @@
 package com.example.demo.features.ingredients.Queries;
 
-import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.context.annotation.Configuration;
@@ -25,18 +24,13 @@ public class IngredientGet {
             this.service = service;
         }
         @GetMapping("/ingredients/{id}")        
-        public ResponseEntity<?> handler(@PathVariable UUID id){
-            var OptionalResponse = service.handler(id);
-            if(OptionalResponse.isPresent()){
-                return ResponseEntity.ok().body(OptionalResponse.get());
-            }
-            return ResponseEntity.status(404).build();            
-
+        public ResponseEntity<?> handler(@PathVariable UUID id){           
+            return ResponseEntity.ok().body(service.handler(id));           
         }
     }
     
     public interface Service {    
-        Optional<Response> handler(UUID id);
+        Response handler(UUID id);
     }
 
     @org.springframework.stereotype.Service
@@ -46,19 +40,14 @@ public class IngredientGet {
             this.repository = repository;
         }
         @Override
-        public Optional<Response> handler(UUID id) {
-            var ingredientOptioal =  repository.findById(id);
-            if(ingredientOptioal.isPresent()){
-                var ingredient = ingredientOptioal.get();
-                return Optional.of(
-                    new Response(
-                        ingredient.getId(), 
-                        ingredient.getName(),
-                        ingredient.getCost()
-                    )
-                );
-            }
-            return Optional.empty();
+        public Response handler(UUID id) {            
+            var ingredient = repository.get(id);
+            return new Response(
+                ingredient.getId(), 
+                ingredient.getName(),
+                ingredient.getCost()
+            );
+                
 
         }
     

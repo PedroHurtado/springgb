@@ -1,17 +1,21 @@
-package com.example.core;
+package com.example.demo.core;
 
 import java.util.Objects;
 import java.util.UUID;
 
+import jakarta.persistence.Id;
+import jakarta.persistence.MappedSuperclass;
 
+@MappedSuperclass
 public abstract class EntityBase{
 
+    
+    @Id
+    private final UUID id;
     //Requerido por el ORM
     protected EntityBase(){
         this(null);
     }
-
-    private final UUID id;
     protected EntityBase(UUID id){
         this.id = id;
     } 

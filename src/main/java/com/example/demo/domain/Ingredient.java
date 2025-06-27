@@ -1,12 +1,14 @@
-package com.example.domain;
+package com.example.demo.domain;
 
 import java.util.UUID;
 
-import com.example.core.EntityBase;
+import com.example.demo.core.EntityBase;
+
+import jakarta.persistence.Entity;
 
 
 
-
+@Entity
 public class Ingredient extends EntityBase {
     
     private String name;
@@ -17,6 +19,10 @@ public class Ingredient extends EntityBase {
     }
     public double getCost() {
         return cost;
+    }
+    //requerido por el orm
+    protected Ingredient(){
+        super();
     }
     protected Ingredient(UUID id, String name, double cost) {
         //ingredient.new

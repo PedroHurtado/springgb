@@ -1,22 +1,29 @@
-package com.example.domain;
+package com.example.demo.domain;
 
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
-import com.example.core.EntityBase;
+import com.example.demo.core.EntityBase;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToMany;
 
 
 
-
+@Entity
 public class Pizza extends EntityBase {
     private static final double PROFIT= 1.2D;
     
     private String name;
     private String description;
-    private String url;    
+    private String url;   
+    @ManyToMany 
     private Set<Ingredient> ingredients;
-    
+    //Requerido por el orm
+    protected Pizza(){
+        super();
+    }
     protected Pizza(UUID id, String name, String description, String url, Set<Ingredient> ingredients) {
         super(id);
         this.name = name;
